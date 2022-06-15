@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { ListType } from "../App";
 import DiaryItem from "./DiaryItem";
 
-// 두개 차이점
+//? 두개 차이점
 // const DiaryList = (diaryist:Array<ListType>) => {
 const DiaryList = (diarylist: ListType[]) => {
   console.log(diarylist); // Object
@@ -14,7 +14,7 @@ const DiaryList = (diarylist: ListType[]) => {
       <h2>Diary History</h2>
       <h4>{Object.keys(diarylist).length} of diaries exists.</h4>
       <div>
-        {diarylist.map(
+        {Object.keys(diarylist).map(
           (item)=>(
             <DiaryItem {...item} key={item.id}/>
           )
