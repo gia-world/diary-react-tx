@@ -1,21 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 
-interface Contents{
+type emotionNum = 1|2|3|4|5;
+
+export interface Contents{
     author:string,
     content:string,
-    emotion:number
+    emotion:emotionNum
 }
 
-const DiaryEditor = () => {
-  const authorInput = useRef<HTMLInputElement>(null);
-  const contentInput = useRef<HTMLTextAreaElement>(null);
-  const [state, setState] = useState({
+const DiaryEditor: FC = () => {
+  const authorInput = useRef<HTMLInputElement|null>(null);
+  const contentInput = useRef<HTMLTextAreaElement|null>(null);
+  const [state, setState] = useState<Contents>({
     author: "",
     content: "",
-    emotion: "1",
+    emotion: 1,
   });
 
-  const handleStateChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => {
+  const handleStateChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
     console.log(e);
     setState({
       ...state,
@@ -25,18 +27,22 @@ const DiaryEditor = () => {
 
   const handleSubmit = () => {
     if (state.author.length < 2) {
-      authorInput.current?.focus();
+      if(authorInput.current){
+        authorInput.current.focus();
+      }
       return;
     }
     if (state.content.length < 5) {
-      contentInput.current?.focus();
+      if(contentInput.current){
+        contentInput.current.focus();
+      }
       return;
     }
     alert("saved");
     setState({
       author: "",
       content: "",
-      emotion: "1",
+      emotion: 1,
     });
   };
 
@@ -52,11 +58,11 @@ const DiaryEditor = () => {
       <div>
         <span>Rate your emotion of the day : </span>
         <select name="emotion" value={state.emotion} onChange={handleStateChange}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
         </select>
       </div>
       <div>
