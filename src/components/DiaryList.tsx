@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { ListType } from "../App";
 import DiaryItem from "./DiaryItem";
 
@@ -12,9 +12,10 @@ const DiaryList = (diarylist: ListType[]) => {
   return (
     <div className="DiaryList">
       <h2>Diary History</h2>
-      <h4>{Object.keys(diarylist).length} of diaries exists.</h4>
+      {/* <h4>{Object.keys(diarylist).length} of diaries exists.</h4> */}
+      <h3>{diarylist.length} of diaries exists.</h3>
       <div>
-        {Object.keys(diarylist).map(
+        {diarylist.map(
           (item)=>(
             <DiaryItem {...item} key={item.id}/>
           )

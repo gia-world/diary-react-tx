@@ -39,7 +39,8 @@ function App() {
   return (
     <div className="App">
       <DiaryEditor />
-      <DiaryList {...dummyList} />
+      <DiaryList diarylist={dummyList}/>
+      {/* <DiaryList {[...dummyList]} /> */}
       {/* 
       diaryList={dummyList} 변수명을 인식하지 못해서? 비구조화 할당 문법으로?
       https://kth990303.tistory.com/253?category=837200
