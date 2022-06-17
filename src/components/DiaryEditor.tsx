@@ -1,23 +1,20 @@
 import React, { FC, useRef, useState } from "react";
+import type { ListType, Contents } from "./types";
 
-type emotionNum = 1|2|3|4|5;
-
-export interface Contents{
-    author:string,
-    content:string,
-    emotion:emotionNum
+interface Params{
+  onCreate: Contents[]
 }
-
-const DiaryEditor: FC = () => {
-  const authorInput = useRef<HTMLInputElement|null>(null);
-  const contentInput = useRef<HTMLTextAreaElement|null>(null);
+// const DiaryEditor = ({ onCreate }:Params) => {
+const DiaryEditor: FC<Params> = ({onCreate}) => {
+  const authorInput = useRef<HTMLInputElement | null>(null);
+  const contentInput = useRef<HTMLTextAreaElement | null>(null);
   const [state, setState] = useState<Contents>({
     author: "",
     content: "",
     emotion: 1,
   });
 
-  const handleStateChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
+  const handleStateChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     console.log(e);
     setState({
       ...state,
@@ -27,17 +24,18 @@ const DiaryEditor: FC = () => {
 
   const handleSubmit = () => {
     if (state.author.length < 2) {
-      if(authorInput.current){
+      if (authorInput.current) {
         authorInput.current.focus();
       }
       return;
     }
     if (state.content.length < 5) {
-      if(contentInput.current){
+      if (contentInput.current) {
         contentInput.current.focus();
       }
       return;
     }
+    onCreate(state.author, state.content, state.emotion);
     alert("saved");
     setState({
       author: "",

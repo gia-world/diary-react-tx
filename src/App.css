@@ -2,6 +2,11 @@ p {
   margin: 0;
 }
 
+body{
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .DiaryEditor {
   border: 1px solid gray;
   text-align: center;

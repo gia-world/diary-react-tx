@@ -1,17 +1,10 @@
-import React from "react";
+import React, { FC, useRef, useState } from "react";
 import "./App.css";
+import type { ListType, Contents, emotionNum } from "./components/types";
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
 
-export interface ListType {
-  id: number;
-  author: string;
-  content: string;
-  emotion: number;
-  created_date: number;
-};
-
-const dummyList :ListType[] = [
+const dummyList: ListType[] = [
   {
     id: 1,
     author: "Gia1",
@@ -36,10 +29,28 @@ const dummyList :ListType[] = [
 ];
 
 function App() {
+  const [data, setData] = useState<ListType[]>([]);
+  const dataId = useRef<number>(0);
+
+  // const onCreate :FC= (author:string, content:string, emotion:emotionNum)=> {
+  // const onCreate: FC<Contents> = (author, content, emotion) => {
+  const onCreate = (author:string, content:string, emotion:emotionNum) => {
+    const created_date = new Date().getTime();
+    const newItem: ListType = {
+      author,
+      content,
+      emotion,
+      created_date,
+      id: dataId.current,
+    };
+    dataId.current += 1;
+    setData([newItem, ...data]);
+  };
+
   return (
     <div className="App">
-      <DiaryEditor />
-      <DiaryList diarylist={dummyList}/>
+      <DiaryEditor onCreate={onCreate} />
+      <DiaryList diarylist={dummyList} />
     </div>
   );
 }

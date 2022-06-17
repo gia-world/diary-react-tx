@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ListType } from "../App";
+import type { ListType } from "./types";
 
 interface Params {
   item: ListType;

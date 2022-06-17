@@ -1,5 +1,5 @@
 import React from "react";
-import { ListType } from "../App";
+import type { ListType } from "./types";
 import DiaryItem from "./DiaryItem";
 
 interface Params {
@@ -22,5 +22,7 @@ const DiaryList = ({ diarylist }: Params) => {
     </div>
   );
 };
-
+DiaryList.defaultProps={
+  diarylist:[],
+}
 export default DiaryList;
