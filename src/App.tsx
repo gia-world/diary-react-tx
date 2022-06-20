@@ -1,6 +1,6 @@
-import React, { FC, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
-import type { ListType, Contents, emotionNum } from "./components/types";
+import { ListType,OnCreateType } from "./components/types";
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
 
@@ -32,9 +32,7 @@ function App() {
   const [data, setData] = useState<ListType[]>([]);
   const dataId = useRef<number>(0);
 
-  // const onCreate :FC= (author:string, content:string, emotion:emotionNum)=> {
-  // const onCreate: FC<Contents> = (author, content, emotion) => {
-  const onCreate = (author:string, content:string, emotion:emotionNum) => {
+  const onCreate: OnCreateType = (author, content, emotion) => {
     const created_date = new Date().getTime();
     const newItem: ListType = {
       author,

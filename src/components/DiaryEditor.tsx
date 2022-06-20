@@ -1,11 +1,11 @@
 import React, { FC, useRef, useState } from "react";
-import type { ListType, Contents } from "./types";
+import { Contents,OnCreateType } from "./types";
 
 interface Params{
-  onCreate: Contents[]
+  onCreate: OnCreateType
 }
-// const DiaryEditor = ({ onCreate }:Params) => {
-const DiaryEditor: FC<Params> = ({onCreate}) => {
+
+const DiaryEditor:FC<Params> = ({onCreate}) => {
   const authorInput = useRef<HTMLInputElement | null>(null);
   const contentInput = useRef<HTMLTextAreaElement | null>(null);
   const [state, setState] = useState<Contents>({

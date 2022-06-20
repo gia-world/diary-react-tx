@@ -4,7 +4,7 @@ import type { ListType } from "./types";
 interface Params {
   item: ListType;
 }
-const DiaryItem: FC<Params> = ({ item }) => {
+const DiaryItem: FC<Params> = ({ item }) =>  {
   const { id, author, content, emotion, created_date } = item;
   return (
     <div className="DiaryItem">
