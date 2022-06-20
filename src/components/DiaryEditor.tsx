@@ -11,14 +11,18 @@ const DiaryEditor:FC<Params> = ({onCreate}) => {
   const [state, setState] = useState<Contents>({
     author: "",
     content: "",
-    emotion: 1,
+    emotion: 1
   });
 
-  const handleStateChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleStateChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     console.log(e);
     setState({
       ...state,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -40,7 +44,7 @@ const DiaryEditor:FC<Params> = ({onCreate}) => {
     setState({
       author: "",
       content: "",
-      emotion: 1,
+      emotion: 1
     });
   };
 
@@ -48,14 +52,30 @@ const DiaryEditor:FC<Params> = ({onCreate}) => {
     <div className="DiaryEditor">
       <h2>Diary of the day</h2>
       <div>
-        <input ref={authorInput} name="author" placeholder="Author" value={state.author} onChange={handleStateChange} />
+        <input
+          ref={authorInput}
+          name="author"
+          placeholder="Author"
+          value={state.author}
+          onChange={handleStateChange}
+        />
       </div>
       <div>
-        <textarea ref={contentInput} name="content" placeholder="Contents" value={state.content} onChange={handleStateChange} />
+        <textarea
+          ref={contentInput}
+          name="content"
+          placeholder="Contents"
+          value={state.content}
+          onChange={handleStateChange}
+        />
       </div>
       <div>
         <span>Rate your emotion of the day : </span>
-        <select name="emotion" value={state.emotion} onChange={handleStateChange}>
+        <select
+          name="emotion"
+          value={state.emotion}
+          onChange={handleStateChange}
+        >
           <option value={1}>1</option>
           <option value={2}>2</option>
           <option value={3}>3</option>
