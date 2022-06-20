@@ -46,15 +46,27 @@ function App() {
   };
 
   const onRemove = (targetId: number) => {
-    alert(`Diary no. ${targetId+1} is deleted.`);
+    alert(`Diary no. ${targetId + 1} is deleted.`);
     const newList = data.filter((it) => it.id !== targetId);
     setData(newList);
   };
 
+  const onEdit = (targetId: number, editedItem: ListType) => {
+    console.log(editedItem);
+    const newData = data.map((item) =>
+      item.id === targetId ? editedItem : item
+    );
+    setData(newData);
+  };
   return (
     <div className="App">
-      <DiaryEditor onCreate={onCreate} />
-      <DiaryList onRemove={onRemove} diarylist={data} />
+      <DiaryEditor onCreate={onCreate} onEdit={onEdit} />
+      <DiaryList
+        onRemove={onRemove}
+        diarylist={data}
+        onCreate={onCreate}
+        onEdit={onEdit}
+      />
     </div>
   );
 }

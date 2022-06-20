@@ -1,19 +1,35 @@
 import React, { FC, useRef, useState } from "react";
-import { Contents,OnCreateType } from "./types";
+import { Contents, ListType, OnCreateType } from "./types";
 
-interface Params{
-  onCreate: OnCreateType
+interface Params {
+  onCreate: OnCreateType;
+  // author?: string;
+  // contents?: string;
+  // emotion?: emotionNum;
+  item?: ListType;
+  isEdit?: boolean;
+  setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
+  onEdit: (targetId: number, editedItem: ListType) => void;
 }
 
-const DiaryEditor:FC<Params> = ({onCreate}) => {
+const DiaryEditor: FC<Params> = ({
+  onCreate,
+  item,
+  // author,
+  // contents,
+  // emotion,
+  isEdit,
+  setIsEdit,
+  onEdit,
+}) => {
   const authorInput = useRef<HTMLInputElement | null>(null);
   const contentInput = useRef<HTMLTextAreaElement | null>(null);
   const [state, setState] = useState<Contents>({
-    author: "",
-    content: "",
-    emotion: 1
+    author: item?.author || "",
+    content: item?.content || "",
+    emotion: item?.emotion || 1,
   });
-
+  console.log(state);
   const handleStateChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -22,7 +38,7 @@ const DiaryEditor:FC<Params> = ({onCreate}) => {
     // console.log(e);
     setState({
       ...state,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -44,13 +60,13 @@ const DiaryEditor:FC<Params> = ({onCreate}) => {
     setState({
       author: "",
       content: "",
-      emotion: 1
+      emotion: 1,
     });
   };
 
   return (
-    <div className="DiaryEditor">
-      <h2>Diary of the day</h2>
+    <div className="DiaryEditor" style={{ borderWidth: isEdit ? 0 : "1px" }}>
+      <h2>{isEdit ? "" : "Diary of the day"}</h2>
       <div>
         <input
           ref={authorInput}
@@ -84,7 +100,23 @@ const DiaryEditor:FC<Params> = ({onCreate}) => {
         </select>
       </div>
       <div>
-        <button onClick={handleSubmit}>Save</button>
+        <button
+          onClick={() => {
+            if (!isEdit) {
+              handleSubmit();
+            }
+            if (isEdit && setIsEdit && item) {
+              setIsEdit(false);
+              onEdit(item.id, {
+                id: item.id,
+                created_date: new Date().getTime(),
+                ...state,
+              });
+            }
+          }}
+        >
+          Save
+        </button>
       </div>
     </div>
   );
