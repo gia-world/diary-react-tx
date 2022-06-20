@@ -19,7 +19,7 @@ const DiaryEditor:FC<Params> = ({onCreate}) => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    console.log(e);
+    // console.log(e);
     setState({
       ...state,
       [e.target.name]: e.target.value

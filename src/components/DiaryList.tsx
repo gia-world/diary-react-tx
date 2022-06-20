@@ -4,9 +4,10 @@ import DiaryItem from "./DiaryItem";
 
 interface Params {
   diarylist: ListType[];
+  onRemove:(targetId: number) => void
 }
 
-const DiaryList = ({ diarylist }: Params) => {
+const DiaryList = ({ diarylist,onRemove }: Params) => {
 
   return (
     <div className="DiaryList">
@@ -15,7 +16,7 @@ const DiaryList = ({ diarylist }: Params) => {
       <div>
         {diarylist.map(
           (item) => (
-            <DiaryItem item={item} key={item.id} />
+            <DiaryItem item={item} key={item.id} onRemove={onRemove} />
           )
         )}
       </div>
