@@ -10,7 +10,6 @@ interface Params {
 }
 const DiaryItem: FC<Params> = ({ item, onRemove, onCreate, onEdit }) => {
   const { id, author, content, emotion, created_date } = item;
-
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const handleRemove = () => {
