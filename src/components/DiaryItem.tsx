@@ -32,13 +32,12 @@ const DiaryItem: FC<Params> = ({ item, onRemove, onCreate, onEdit }) => {
             </p>
           </div>
           <div className="content">{content}</div>
-          {/* <button>Edit</button> */}
           <button
             onClick={() => {
               setIsEdit(true);
             }}
           >
-            edit
+            Edit
           </button>
           <button onClick={handleRemove}>Delete</button>
         </div>
@@ -51,21 +50,6 @@ const DiaryItem: FC<Params> = ({ item, onRemove, onCreate, onEdit }) => {
             onEdit={onEdit}
             setIsEdit={setIsEdit}
           />
-          {/* <button
-            onClick={() => {
-              setIsEdit(false);
-            }}
-          >
-            save
-          </button> */}
-          {/* <div>
-            <input type="text" name="" id="" />
-            <textarea></textarea>
-            <select>
-              <option value=""></option>
-            </select>
-          </div>
-          <button onClick={() => {}}>edit</button> */}
         </div>
       )}
     </div>

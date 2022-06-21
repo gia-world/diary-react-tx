@@ -29,7 +29,7 @@ const DiaryEditor: FC<Params> = ({
     content: item?.content || "",
     emotion: item?.emotion || 1,
   });
-  console.log(state);
+  // console.log(state);
   const handleStateChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -45,18 +45,22 @@ const DiaryEditor: FC<Params> = ({
   const handleSubmit = () => {
     if (state.author.length < 2) {
       if (authorInput.current) {
+        alert('Please enter more than 2 letters')
         authorInput.current.focus();
+        authorInput.current.style.color='red'
       }
       return;
     }
     if (state.content.length < 5) {
       if (contentInput.current) {
+        alert('Please enter more than 5 letters')
         contentInput.current.focus();
+        contentInput.current.style.color='red'
       }
       return;
     }
     onCreate(state.author, state.content, state.emotion);
-    alert("saved");
+    alert("Saved");
     setState({
       author: "",
       content: "",
